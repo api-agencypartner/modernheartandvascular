@@ -505,6 +505,7 @@ dialog#bookdlg::backdrop{background:color-mix(in srgb,var(--ink) 72%,transparent
 .dlg .row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
 .dlg label{display:grid;gap:6px;font-size:14px;color:var(--mute);min-width:0}
 .dlg input,.dlg select{width:100%;min-width:0;min-height:52px;border-radius:14px;border:1.5px solid var(--line);padding:0 14px;font:400 17px var(--f);background:var(--white);color:var(--ink)}
+.dlg select{appearance:none;-webkit-appearance:none;padding-right:48px;text-overflow:ellipsis;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23161618' stroke-width='1.6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;background-size:12px 8px}
 .dlg input:focus,.dlg select:focus{outline:none;border-color:var(--ink)}
 .dlg input[aria-invalid="true"]{border-color:var(--red)}
 .dlg .err{color:var(--red);font-size:14px;min-height:20px}
@@ -864,13 +865,12 @@ dialog#bookdlg::backdrop{background:color-mix(in srgb,var(--ink) 72%,transparent
           <label for="fPhone">Phone<input id="fPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
         </div>
         <div class="row2">
-          <label for="fOffice">Office<select id="fOffice" name="office"></select></label>
+          <label for="fOffice">Care center<select id="fOffice" name="office"></select></label>
           <label for="fReason">Reason<select id="fReason" name="reason"></select></label>
         </div>
         <label for="fDay">Preferred day<select id="fDay" name="day"><option>As soon as possible</option><option>This week</option><option>Next week</option><option>I am flexible</option></select></label>
         <p class="err" id="fErr" aria-live="assertive"></p>
         <button class="btn" type="submit" id="fSubmit">Send request</button>
-        <p class="hint">Prototype form: nothing is sent. Please do not enter health details here. [NEEDS: booking system and HIPAA-compliant form]</p>
       </div>
     </div>
   </form>
