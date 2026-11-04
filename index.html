@@ -147,7 +147,7 @@ header.site .btn{min-height:44px;padding:0 20px;font-size:15px}
 .hero h1{font-size:clamp(44px,6.6vw,100px);line-height:.96;font-weight:300;max-width:15ch}
 .hero h1 em{font-style:normal;color:var(--red-hi)}
 .hero .sub{font-size:clamp(18px,1.4vw,20px);color:var(--on-3);max-width:50ch}
-.stage{position:relative;flex:1 0 auto;height:clamp(380px,52svh,640px);margin-top:28px;z-index:1;pointer-events:none}
+.stage{position:relative;flex:1 0 auto;height:clamp(380px,calc(100svh - 560px),640px);margin-top:28px;z-index:1;pointer-events:none}
 .stage .glow{position:absolute;left:50%;bottom:0;width:min(900px,96vw);transform:translateX(-50%);opacity:.9}
 .stage .glow img{width:100%;height:auto;display:block}
 .stage .glow.b{animation:glowbeat .6s ease-out}
@@ -642,62 +642,62 @@ dialog#bookdlg::backdrop{background:color-mix(in srgb,var(--ink) 72%,transparent
   <div class="stage" id="stage">
     <div class="glow" id="glow" aria-hidden="true"><img src="img/glow.webp" alt="" width="800" height="720"></div>
     <canvas id="heroEcg" aria-hidden="true"></canvas>
-  <div class="float f1 rise d3" data-d="1.6"><div class="stars" aria-hidden="true">★★★★★</div><b>4.9</b><span>From 456 Zocdoc reviews</span></div>
+    <div class="float f1 rise d3" data-d="1.6"><div class="stars" aria-hidden="true">★★★★★</div><b>4.9</b><span>From 456 Zocdoc reviews</span></div>
     <div class="float f2 rise d3" data-d="1.3"><span><i></i>Same-day visits</span><b>8 care centers</b><span>Humble, Katy, The Woodlands, Medical Center and more</span></div>
-    <form class="bookbar" id="heroBook" aria-label="Book a visit">
-      <label for="hbOffice"><span>Care center</span><select id="hbOffice" name="office"></select></label>
-      <label for="hbReason"><span>Reason for visit</span>
-        <select id="hbReason" name="reason">
-          <option>New patient visit</option><option>Chest pain or pressure</option><option>Racing or skipping heartbeat</option><option>Swollen or aching legs</option><option>Preventive heart check</option><option>Surgical clearance</option><option>Follow-up visit</option>
-        </select>
-      </label>
-      <button class="btn" type="submit">Book a visit</button>
-    </form>
-</section>
-
-<!-- FOLD 3 · SERVICES -->
-<section class="fold svc" id="services" aria-labelledby="svcH">
-    <div class="wrap">
-      <div class="shead reveal">
-        <h2 id="svcH">Care for every part of your <em>heart and vessels.</em></h2>
-        <p>From a first preventive check to rhythm care, valve care and vein treatment, one team follows you the whole way.</p>
-      </div>
-      <div class="g12 bento" id="bento"></div>
-    </div>
-</section>
-
-<!-- FOLD 4 · SYMPTOMS -->
-<section class="fold symp dark grain" id="symptoms" aria-labelledby="sympH">
-    <div class="wrap">
-      <div class="shead reveal">
-        <h2 id="sympH">What brings you in <em>today?</em></h2>
-        <p>Pick what you are feeling. We will explain, in plain words, what we usually check and who you will see.</p>
-      </div>
-      <div class="g12">
-        <ul class="slist" role="tablist" aria-label="Symptoms" id="slist"></ul>
-        <div class="spanel card" id="spanel" role="tabpanel" aria-live="polite"></div>
-      </div>
-      <p class="urgent" role="note"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l10 19H2z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 9v5M12 17v.5" stroke="currentColor" stroke-width="1.8"/></svg><span><b>Chest pain right now?</b> Severe pain, pressure, or pain with shortness of breath, sweating or fainting is an emergency. Call 911.</span></p>
-    </div>
-</section>
-
-<!-- FOLD 5 · TESTING -->
-<section class="tests" id="testing" aria-labelledby="testH">
-    <div class="pin">
-      <div class="wrap">
-        <div class="shead">
-          <h2 id="testH">Testing on site. <em>Answers sooner.</em></h2>
-          <p>Most heart and vascular tests happen at our care centers and Humble testing center, so you are not sent across town.</p>
-        </div>
-      </div>
-      <div class="track" id="track"></div>
-      <div class="wrap"><div class="prog" aria-hidden="true"><i id="progBar"></i></div></div>
     <div class="docs3 up" id="docs3">
       <img class="l" src="img/cut-pei.webp" alt="" data-d=".5">
       <img class="c" src="img/cut-agarwal.webp" decoding="async" alt="Dr. Rajiv Agarwal, cardiologist and leader of Modern Heart and Vascular, in a branded white coat" data-d="1" fetchpriority="high">
       <img class="rr" src="img/cut-morales.webp" alt="" data-d=".5">
     </div>
   </div>
+  <form class="bookbar" id="heroBook" aria-label="Book a visit">
+    <label for="hbOffice"><span>Care center</span><select id="hbOffice" name="office"></select></label>
+    <label for="hbReason"><span>Reason for visit</span>
+      <select id="hbReason" name="reason">
+        <option>New patient visit</option><option>Chest pain or pressure</option><option>Racing or skipping heartbeat</option><option>Swollen or aching legs</option><option>Preventive heart check</option><option>Surgical clearance</option><option>Follow-up visit</option>
+      </select>
+    </label>
+    <button class="btn" type="submit">Book a visit</button>
+  </form>
+</section>
+
+<!-- FOLD 3 · SERVICES -->
+<section class="fold svc" id="services" aria-labelledby="svcH">
+  <div class="wrap">
+    <div class="shead reveal">
+      <h2 id="svcH">Care for every part of your <em>heart and vessels.</em></h2>
+      <p>From a first preventive check to rhythm care, valve care and vein treatment, one team follows you the whole way.</p>
+    </div>
+    <div class="g12 bento" id="bento"></div>
+  </div>
+</section>
+
+<!-- FOLD 4 · SYMPTOMS -->
+<section class="fold symp dark grain" id="symptoms" aria-labelledby="sympH">
+  <div class="wrap">
+    <div class="shead reveal">
+      <h2 id="sympH">What brings you in <em>today?</em></h2>
+      <p>Pick what you are feeling. We will explain, in plain words, what we usually check and who you will see.</p>
+    </div>
+    <div class="g12">
+      <ul class="slist" role="tablist" aria-label="Symptoms" id="slist"></ul>
+      <div class="spanel card" id="spanel" role="tabpanel" aria-live="polite"></div>
+    </div>
+    <p class="urgent" role="note"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l10 19H2z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 9v5M12 17v.5" stroke="currentColor" stroke-width="1.8"/></svg><span><b>Chest pain right now?</b> Severe pain, pressure, or pain with shortness of breath, sweating or fainting is an emergency. Call 911.</span></p>
+  </div>
+</section>
+
+<!-- FOLD 5 · TESTING -->
+<section class="tests" id="testing" aria-labelledby="testH">
+  <div class="pin">
+    <div class="wrap">
+      <div class="shead">
+        <h2 id="testH">Testing on site. <em>Answers sooner.</em></h2>
+        <p>Most heart and vascular tests happen at our care centers and Humble testing center, so you are not sent across town.</p>
+      </div>
+    </div>
+    <div class="track" id="track"></div>
+    <div class="wrap"><div class="prog" aria-hidden="true"><i id="progBar"></i></div></div>
   </div>
 </section>
 
@@ -984,10 +984,9 @@ ecg($('#heroEcg'),{bpm:62,rgb:'239,90,94',gap:40,lw:2.2,speed:.3,glow:12,onBeat:
 /* ---------- hero floats: sit outside the doctor group ---------- */
 (()=>{const st=$('#stage'),f1=$('.f1'),f2=$('.f2');if(!st||!f1||!f2)return;
   const place=()=>{const imgs=[...$$('#docs3 img')].filter(i=>i.offsetWidth);if(!imgs.length)return;const sr=st.getBoundingClientRect();
-    let L=1e9,Rr=-1e9;imgs.forEach(i=>{const r=i.getBoundingClientRect();L=Math.min(L,r.left+r.width*.12);Rr=Math.max(Rr,r.right-r.width*.12)});
+    let L=1e9,Rr=-1e9;imgs.forEach(i=>{const x=i.offsetLeft+i.parentElement.offsetLeft;L=Math.min(L,x+i.offsetWidth*.12);Rr=Math.max(Rr,x+i.offsetWidth*.88)});
     const W=sr.width,g=16;
-    const x2=Math.min(Rr-sr.left+g,W-f2.offsetWidth-g),x1=Math.max(g,L-sr.left-f1.offsetWidth-g);
-    f2.style.left=x2+'px';f2.style.right='auto';f1.style.left=x1+'px'};
+    f2.style.left=Math.min(Rr+g,W-f2.offsetWidth-g)+'px';f2.style.right='auto';f1.style.left=Math.max(g,L-f1.offsetWidth-g)+'px'};
   addEventListener('resize',place);$$('#docs3 img').forEach(i=>i.complete?0:i.addEventListener('load',place));place();setTimeout(place,1600)})();
 /* ---------- hero parallax ---------- */
 if(FINE&&!RM){const layers=$$('#docs3 img,.float');let mx=0,my=0,cx=0,cy=0;
