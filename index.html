@@ -349,7 +349,8 @@ header.site .btn{min-height:44px;padding:0 20px;font-size:15px}
 .memb>*{margin:0;height:120px;display:grid;place-items:center;padding:0 24px;border-left:1px solid var(--line)}
 .memb>*:first-child{border-left:0}
 .memb .ml{font-size:15px;color:var(--mute);text-align:center}
-.memb img{max-height:48px;max-width:100%;width:auto;height:auto;object-fit:contain;filter:grayscale(1);opacity:.8;transition:filter .3s,opacity .3s}
+.memb img{max-height:56px;max-width:100%;width:auto;height:auto;object-fit:contain;transform:translateZ(0);transition:transform .3s var(--ease)}
+.memb figure:hover img{transform:translateZ(0) scale(1.04)}
 .memb figure:hover img{filter:none;opacity:1}
 .quote .who{display:flex;align-items:center;gap:14px;justify-content:center;margin-top:28px;text-align:left}
 .quote .who cite{margin:0}
@@ -720,7 +721,7 @@ dialog#bookdlg::backdrop{background:color-mix(in srgb,var(--ink) 72%,transparent
       <div><b>5</b><span class="k">Offices across Greater Houston</span></div>
       <div><b>22</b><span class="k">Insurance plans accepted</span></div>
     </div>
-    <div class="memb reveal"><span class="ml">Our physicians are members of</span><figure><img src="img/logo-acc.png" alt="American College of Cardiology" loading="lazy"></figure><figure><img src="img/logo-scai.png" alt="Society for Cardiovascular Angiography and Interventions" loading="lazy"></figure><figure><img src="img/logo-scct.png" alt="Society of Cardiovascular Computed Tomography" loading="lazy"></figure></div>
+    <div class="memb reveal"><span class="ml">Our physicians are members of</span><figure><img src="img/logo-acc.png" decoding="async" alt="American College of Cardiology" loading="lazy"></figure><figure><img src="img/logo-scai.png" decoding="async" alt="Society for Cardiovascular Angiography and Interventions" loading="lazy"></figure><figure><img src="img/logo-scct.png" decoding="async" alt="Society of Cardiovascular Computed Tomography" loading="lazy"></figure></div>
     <div class="qcard card reveal">
       <div class="qm" aria-hidden="true"><svg width="26" height="20" viewBox="0 0 26 20"><path d="M0 20V11C0 4.5 3.6.8 10 0l1 3C7.6 3.8 6 6 6 9h5v11zm15 0V11c0-6.5 3.6-10.2 10-11l1 3c-3.4.8-5 3-5 6h5v11z" fill="#fefdfb"/></svg></div>
       <div class="quote" id="quote" aria-live="polite"></div>
