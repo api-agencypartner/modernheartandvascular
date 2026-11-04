@@ -61,8 +61,21 @@ p{margin:0}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;border:1.5px solid var(--red);background:var(--red);color:var(--on);font:500 17px var(--f);text-decoration:none;cursor:pointer;transition:transform .2s var(--ease),background .2s,border-color .2s,box-shadow .2s}
-.btn:hover{background:var(--red-dk);border-color:var(--red-dk)}
-.btn:active{transform:scale(.98)}
+.btn{position:relative;overflow:hidden;isolation:isolate;transition:transform .35s var(--ease),background .3s,border-color .3s,box-shadow .35s var(--ease),color .3s}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:radial-gradient(120px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.28),transparent 70%);opacity:0;transition:opacity .35s}
+.btn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;z-index:-1;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);pointer-events:none}
+.btn svg{transition:transform .35s var(--ease)}
+.btn:hover{background:var(--red-dk);border-color:var(--red-dk);transform:translateY(-2px);box-shadow:0 10px 24px -8px color-mix(in srgb,var(--red) 60%,transparent),inset 0 1px 0 rgba(255,255,255,.18)}
+.btn:hover::before{opacity:1}
+.btn:hover::after{left:130%;transition:left .8s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn:active{transform:translateY(0) scale(.97);box-shadow:0 3px 8px -4px color-mix(in srgb,var(--red) 50%,transparent),inset 0 2px 6px rgba(0,0,0,.22);transition-duration:.08s}
+.btn:focus-visible{outline:2.5px solid var(--red);outline-offset:3px}
+.btn.light:hover,.btn.ghost:hover{box-shadow:0 10px 24px -10px rgba(0,0,0,.35)}
+.btn.light::before,.btn.light::after{background-image:radial-gradient(120px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--red) 14%,transparent),transparent 70%)}
+.sv .more{transition:background .3s,border-color .3s,color .3s,transform .45s var(--ease),box-shadow .35s}
+.sv:hover .more{box-shadow:0 8px 20px -6px rgba(0,0,0,.35)}
+.sv:active .more{transform:rotate(-45deg) scale(.9)}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
 .btn.ghost{background:transparent;color:inherit;border-color:currentColor}
 .btn.ghost:hover{background:color-mix(in srgb,var(--mute) 14%,transparent)}
@@ -199,14 +212,14 @@ header.site .btn{min-height:44px;padding:0 20px;font-size:15px}
 .sv .more svg{width:14px;height:14px}
 .sv:hover .more{background:var(--ink);border-color:var(--ink);color:var(--on);transform:rotate(-45deg)}
 .sv.big{grid-column:span 6;grid-row:span 2;background:radial-gradient(90% 70% at 70% 20%,var(--red-lite) 0%,var(--red) 40%,var(--red-deep) 100%);color:var(--on);border-color:var(--red-dk);isolation:isolate}
-.sv.big::after{content:"";position:absolute;inset:0;z-index:-1;background-image:var(--grain);opacity:.6}
+.sv.big::after{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--grain);opacity:.6}
 .sv.big h3{font-size:clamp(32px,3.4vw,48px);font-weight:300;line-height:1.02;max-width:12ch}
 .sv.big p{color:var(--on-red);font-size:18px;max-width:40ch}
 .sv.big{padding-right:50%;justify-content:flex-start;min-height:560px}
 .sv.big .svdoc{position:absolute;right:-10%;bottom:0;height:78%;width:auto;max-width:none;z-index:-1;filter:drop-shadow(0 30px 40px color-mix(in srgb,var(--red-deep) 70%,transparent))}
 .sv.big::before{content:"";position:absolute;left:0;right:0;bottom:0;height:30%;z-index:-1;background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--red-deep) 85%,transparent))}
 .sv.big h3,.sv.big p,.sv.big ul{position:relative}
-.sv.big ul{align-self:flex-start;max-width:100%}
+.sv.big ul{align-self:flex-start;max-width:100%;width:max-content;flex-direction:column;align-items:flex-start}
 .sv.big ul{border-color:color-mix(in srgb,var(--on) 24%,transparent)}
 .sv.big li{background:color-mix(in srgb,var(--on) 14%,transparent);color:var(--on)}
 .sv.big .more{border-color:color-mix(in srgb,var(--on) 40%,transparent)}
@@ -1095,6 +1108,7 @@ form.addEventListener('submit',e=>{e.preventDefault();const n=$('#fName'),p=$('#
   setTimeout(()=>{const o=O.find(x=>x.id===$('#fOffice').value);$('#dlgBody').innerHTML=`<div class="ok"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="34" fill="none" stroke="#a92326" stroke-width="2"/><path d="M12 38h14l5-10 7 20 7-26 5 16h10" fill="none" stroke="#a92326" stroke-width="2.4" stroke-linejoin="round"/></svg><h2>Request received</h2><p class="hint" style="font-size:16px;max-width:36ch">Thank you, ${esc(n.value.trim().split(' ')[0])}. Our ${esc(o.name)} team will call you within one business day. (Prototype: nothing was sent.)</p><button class="btn" type="button" onclick="this.closest('dialog').close()">Done</button></div>`},900)});
 })();
 </script>
+<script>document.addEventListener('pointermove',e=>{const b=e.target.closest&&e.target.closest('.btn');if(!b)return;const r=b.getBoundingClientRect();b.style.setProperty('--mx',e.clientX-r.left+'px');b.style.setProperty('--my',e.clientY-r.top+'px')},{passive:true})</script>
 </body>
 </html>
 
