@@ -202,12 +202,10 @@ header.site .btn{min-height:44px;padding:0 20px;font-size:15px}
 .marq{margin-top:48px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,var(--ink) 12%,var(--ink) 88%,transparent);mask-image:linear-gradient(90deg,transparent,var(--ink) 12%,var(--ink) 88%,transparent)}
 .marq .t{display:flex;gap:48px;width:max-content;animation:marq 48s linear infinite}
 .marq:hover .t{animation-play-state:paused}
-.marq span{display:inline-flex;align-items:center;font-size:22px;font-weight:300;color:var(--char);white-space:nowrap}
+.marq span{font-size:22px;font-weight:300;color:var(--char);white-space:nowrap}
 .marq.dk{margin-top:96px}
 .marq.dk span{color:var(--on-3)}
 .marq span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);margin-right:48px;vertical-align:middle}
-.marq img{height:32px;width:auto;max-width:180px;object-fit:contain;filter:brightness(0) invert(1);opacity:.72;transition:opacity .3s}
-.marq span:hover img{opacity:1}
 @keyframes marq{to{transform:translateX(-50%)}}
 .proof .cap{margin-top:20px;text-align:center;font-size:15px;color:var(--mute)}
 
@@ -382,7 +380,7 @@ header.site .btn{min-height:44px;padding:0 20px;font-size:15px}
 .bars .mini{width:44px;height:44px;border-radius:50%;object-fit:cover;opacity:.55;filter:grayscale(.6);transition:opacity .3s,filter .3s,box-shadow .3s}
 .bars button:hover .mini{opacity:.85}
 .bars button[aria-selected="true"] .mini{opacity:1;filter:none}
-.bars button:focus-visible{outline:2px solid var(--red)}
+.bars button:focus{outline:none}.bars button:focus-visible .mini{box-shadow:0 0 0 2px var(--white),0 0 0 4px var(--red)}
 .bars button{position:relative}
 .bars button i{position:absolute;left:50%;top:-4px;width:52px;height:52px;margin-left:-26px;border-radius:50%;background:conic-gradient(var(--red) calc(var(--p,0)*1%),transparent 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2.5px),var(--ink) calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 2.5px),var(--ink) calc(100% - 2px));pointer-events:none}
 .stories .src{margin-top:24px;text-align:center;font-size:15px;color:var(--mute)}
@@ -751,7 +749,7 @@ dialog#bookdlg::backdrop{background:color-mix(in srgb,var(--ink) 72%,transparent
       <div class="quote" id="quote" aria-live="polite"></div>
       <div class="bars" id="bars" role="tablist" aria-label="Choose a story"></div>
     </div>
-    <p class="src">From testimonials published by Modern Heart and Vascular. <a href="https://modernheartandvascular.com/testimonials/">Read more reviews</a></p>
+    <p class="src">From testimonials published by Modern Heart and Vascular. Photos are illustrative and do not show the reviewers. <a href="https://modernheartandvascular.com/testimonials/">Read more reviews</a></p>
   </div>
 </section>
 
@@ -996,8 +994,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return
 const bind=()=>$$('.reveal,#steps').forEach((el,i)=>{if(el.getBoundingClientRect().top>innerHeight&&!RM&&el.classList.contains('reveal'))el.classList.add('pre');io.observe(el)});
 
 /* ---------- marquee ---------- */
-const slug=p=>p.toLowerCase().replace(/’/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-$('#marq').innerHTML=[...PLANS,...PLANS].map((p,i)=>`<span ${i>=PLANS.length?'aria-hidden="true"':''}><img src="img/ins/${slug(p)}.svg" alt="${esc(p)}" loading="lazy" onerror="this.onerror=null;if(!this.dataset.png){this.dataset.png=1;this.src=this.src.replace('.svg','.png')}else{this.replaceWith(document.createTextNode(this.alt))}"></span>`).join('');
+$('#marq').innerHTML=[...PLANS,...PLANS].map((p,i)=>`<span ${i>=PLANS.length?'aria-hidden="true"':''}>${esc(p)}</span>`).join('');
 
 /* ---------- services ---------- */
 const arrow='<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
@@ -1079,9 +1076,9 @@ const PV=[{"id": "r-agarwal", "n": "Dr. Rajiv Agarwal", "c": "MD, FACC, FSCCT", 
 
 /* ---------- stories ---------- */
 const qEl=$('#quote'),bars=$('#bars');let qi=0,qStart=0;const QD=7000;
-const ini=n=>n.split(' ').map(w=>w[0]).join('').replace('.','');const AV=['lauren','phil','michelle','lequisha'];/* placeholder portraits from UI8 RAW until the client supplies consented patient photos */
-bars.innerHTML=Q.map((q,i)=>`<button role="tab" aria-label="Story from ${esc(q[1])}" aria-selected="${i===0}" data-i="${i}"><span class="mini ini" aria-hidden="true">${esc(q[1].split(' ').map(w=>w[0]).join('').replace('.',''))}</span><i aria-hidden="true"></i></button>`).join('');
-function showQ(i){qi=i;qEl.innerHTML=`<div class="swap"><blockquote>“${esc(Q[i][0])}”</blockquote><div class="who"><span class="av ini" aria-hidden="true">${esc(Q[i][1].split(' ').map(w=>w[0]).join('').replace('.',''))}</span><cite><b>${esc(Q[i][1])}</b>Patient, Modern Heart and Vascular</cite></div></div>`;bars.querySelectorAll('button').forEach((b,j)=>{b.setAttribute('aria-selected',String(i===j));b.querySelector('i').style.setProperty('--p',0)});qStart=performance.now()}
+const ini=n=>n.split(' ').map(w=>w[0]).join('').replace('.','');const AV=['billy','james','martha','phebie','cathy','norman','averett'];/* placeholder portraits from UI8 RAW until the client supplies consented patient photos */
+bars.innerHTML=Q.map((q,i)=>`<button role="tab" aria-label="Story from ${esc(q[1])}" aria-selected="${i===0}" data-i="${i}"><img class="mini" src="img/pt-${AV[i]}.jpg" alt="" width="44" height="44"><i aria-hidden="true"></i></button>`).join('');
+function showQ(i){qi=i;qEl.innerHTML=`<div class="swap"><blockquote>“${esc(Q[i][0])}”</blockquote><div class="who"><img class="av" src="img/pt-${AV[i]}.jpg" alt="" width="64" height="64"><cite><b>${esc(Q[i][1])}</b>Patient, Modern Heart and Vascular</cite></div></div>`;bars.querySelectorAll('button').forEach((b,j)=>{b.setAttribute('aria-selected',String(i===j));b.querySelector('i').style.setProperty('--p',0)});qStart=performance.now()}
 let qOn=false;new IntersectionObserver(e=>{qOn=e[0].isIntersecting;if(qOn)qStart=performance.now()-(parseFloat(bars.children[qi].querySelector('i').style.getPropertyValue('--p'))||0)/100*QD}).observe(qEl);
 function tickQ(t){if(!RM&&!document.hidden&&qOn){const p=Math.min(1,(t-qStart)/QD),cur=bars.children[qi].querySelector('i');cur.style.setProperty('--p',p*100);if(p>=1)showQ((qi+1)%Q.length)}requestAnimationFrame(tickQ)}
 bars.addEventListener('click',e=>{const b=e.target.closest('button');if(b)showQ(+b.dataset.i)});
