@@ -174,6 +174,7 @@ header.site .btn{min-height:44px;padding:0 20px;font-size:15px}
 .ini{display:inline-grid;place-items:center;border-radius:50%;background:linear-gradient(140deg,var(--red-hi),var(--red-deep));color:var(--on);font:500 15px var(--f);letter-spacing:.02em;flex:none}
 .mini.ini{width:44px;height:44px;font-size:13px}
 .av.ini{width:64px;height:64px;font-size:20px}
+.stage.nofit .float{visibility:hidden}
 .f2 i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:8px}
 .bookbar{position:absolute;z-index:5;left:50%;bottom:32px;transform:translateX(-50%);width:min(820px,calc(100% - 40px));display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:8px;padding:8px;background:var(--white);border-radius:24px;box-shadow:0 40px 80px -24px color-mix(in srgb,var(--ink) 70%,transparent)}
 .bookbar{animation:bbin 1.1s var(--ease) both .3s}
@@ -986,7 +987,7 @@ ecg($('#heroEcg'),{bpm:62,rgb:'239,90,94',gap:40,lw:2.2,speed:.3,glow:12,onBeat:
   const place=()=>{const imgs=[...$$('#docs3 img')].filter(i=>i.offsetWidth);if(!imgs.length)return;const sr=st.getBoundingClientRect();
     let L=1e9,Rr=-1e9;imgs.forEach(i=>{const x=i.offsetLeft+i.parentElement.offsetLeft;L=Math.min(L,x+i.offsetWidth*.12);Rr=Math.max(Rr,x+i.offsetWidth*.88)});
     const W=sr.width,g=16;
-    f2.style.left=Math.min(Rr+g,W-f2.offsetWidth-g)+'px';f2.style.right='auto';f1.style.left=Math.max(g,L-f1.offsetWidth-g)+'px'};
+    const fit=Rr+g+f2.offsetWidth<=W-g&&L-g-f1.offsetWidth>=g;st.classList.toggle('nofit',!fit);f2.style.left=Math.min(Rr+g,W-f2.offsetWidth-g)+'px';f2.style.right='auto';f1.style.left=Math.max(g,L-f1.offsetWidth-g)+'px'};
   addEventListener('resize',place);$$('#docs3 img').forEach(i=>i.complete?0:i.addEventListener('load',place));place();setTimeout(place,1600)})();
 /* ---------- hero parallax ---------- */
 if(FINE&&!RM){const layers=$$('#docs3 img,.float');let mx=0,my=0,cx=0,cy=0;
