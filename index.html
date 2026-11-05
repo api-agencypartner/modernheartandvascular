@@ -1083,6 +1083,11 @@ const PV=[{"id": "r-agarwal", "n": "Dr. Rajiv Agarwal", "c": "MD, FACC, FSCCT", 
   $('#dNext').addEventListener('click',()=>step(1));$('#dPrev').addEventListener('click',()=>step(-1));
   $('#dchips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;f=b.dataset.g;$$('#dchips .chip').forEach(c=>c.setAttribute('aria-pressed',String(c===b)));bs.forEach(x=>x.classList.toggle('off',f!=='all'&&x.dataset.g!==f));const v=vis();sel(+v[Math.min(Math.floor(v.length/2),v.length-1)].dataset.i,true)});
   let st=0;ar.addEventListener('scroll',()=>{clearTimeout(st);st=setTimeout(()=>{const mid=ar.scrollLeft+ar.clientWidth/2;let best=null,bd=1e9;vis().forEach(b=>{const d=Math.abs(b.offsetLeft+b.offsetWidth/2-mid);if(d<bd){bd=d;best=b}});if(best&&+best.dataset.i!==cur)sel(+best.dataset.i,false)},140)},{passive:true});
+  /* mouse wheel: one doctor per notch; releases page scroll at either end */
+  let wAcc=0,wLock=0;ar.addEventListener('wheel',e=>{if(Math.abs(e.deltaX)>Math.abs(e.deltaY))return;
+    const v=vis(),k=v.indexOf(bs[cur]),d=e.deltaY>0?1:-1;if((d>0&&k>=v.length-1)||(d<0&&k<=0)){wAcc=0;return}
+    e.preventDefault();const now=performance.now();if(now<wLock)return;wAcc+=e.deltaY;
+    if(Math.abs(wAcc)>=40){const n=v[k+d];sel(+n.dataset.i,true);wAcc=0;wLock=now+(e.deltaMode?260:420)}},{passive:false});
   sel(0,false);requestAnimationFrame(()=>sel(0,true));
 })();
 
