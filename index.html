@@ -103,7 +103,9 @@ p{margin:0}
 .ico{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:var(--red-tint);color:var(--red);flex:none}
 .ico svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 /* header: the client's own menu, real page links, with a utility bar */
-header.site{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px);color:var(--on);transition:background .35s,color .35s,box-shadow .35s}
+header.site{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px);color:var(--on);transition:background .35s,color .35s,box-shadow .35s,transform .45s cubic-bezier(.2,.7,.2,1);will-change:transform}
+header.site.hide{transform:translateY(-100%)}
+@media (prefers-reduced-motion:reduce){header.site{transition:background .35s,color .35s}}
 .util{font-size:13px;border-bottom:1px solid color-mix(in srgb,var(--on) 12%,transparent);transition:border-color .35s}
 .urow{display:flex;align-items:center;gap:24px;height:36px}
 .util a{text-decoration:none;opacity:.8}
@@ -954,7 +956,9 @@ const F=[
 
 /* ---------- header ---------- */
 const hdr=$('#hdr'),light=$$('.svc,.tests,.stories,.visit');
-function onS(){const y=108;let solid=false;for(const s of light){const r=s.getBoundingClientRect();if(r.top<=y&&r.bottom>y){solid=true;break}}hdr.classList.toggle('solid',solid);hdr.classList.toggle('dk',!solid&&scrollY>40)}
+function onS(){const y=108;let solid=false;for(const s of light){const r=s.getBoundingClientRect();if(r.top<=y&&r.bottom>y){solid=true;break}}hdr.classList.toggle('solid',solid);hdr.classList.toggle('dk',!solid&&scrollY>40);
+  const cy=scrollY,d=cy-lastY;if(Math.abs(d)>6){const busy=$('.dd.open')||$('#drawer.open')||hdr.contains(document.activeElement);hdr.classList.toggle('hide',d>0&&cy>160&&!busy);lastY=cy}if(cy<=160)hdr.classList.remove('hide')}
+let lastY=scrollY;hdr.addEventListener('focusin',()=>hdr.classList.remove('hide'));
 let sq=0;addEventListener('scroll',()=>{if(!sq){sq=requestAnimationFrame(()=>{sq=0;onS()})}},{passive:true});onS();
 const mb=$('#menuBtn'),dw=$('#drawer');mb.addEventListener('click',()=>{const o=dw.classList.toggle('open');mb.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':''});
 $$('.dd>button').forEach(b=>b.addEventListener('click',()=>{const li=b.parentElement,o=!li.classList.contains('open');$$('.dd.open').forEach(x=>{x.classList.remove('open');x.firstElementChild.setAttribute('aria-expanded','false')});li.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))}));
