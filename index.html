@@ -486,7 +486,7 @@ footer{padding:64px 0 calc(40px + env(safe-area-inset-bottom,0px))}
 .soc a{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-d);display:grid;place-items:center;color:var(--on-3);transition:background .2s,color .2s,border-color .2s}
 .soc a:hover{background:var(--red);border-color:var(--red);color:var(--on);text-decoration:none}
 .soc svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.fgrid .ql{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(32px,4vw,64px);row-gap:8px}
+.fgrid .ql{grid-template-columns:repeat(2,max-content);justify-content:start;column-gap:48px;row-gap:8px}
 .fcta .ch{margin-top:32px}
 .phones{display:grid!important;gap:0!important;border-top:1px solid var(--line-d)}
 .phones li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid var(--line-d)}
